@@ -53,6 +53,7 @@ const Members = props => {
     const [pageIndex, setPageIndex] = useState(0);
     const [filter, setFilter] = useState('');
     const [serverData, setServerData] = useState([]);
+    const [selectAll, setSelectAll] = useState(null);
 
     useEffect(() => {
         console.log('fetchin')
@@ -60,7 +61,7 @@ const Members = props => {
         console.log('pc 1', pc);
         setPageCount(pc);
         fetchData()
-    }, [filter, pageIndex, pageSize, pageCount, serverData])
+    }, [filter, pageIndex, pageSize, pageCount, serverData, selectAll])
 
     const nextPage = () => {
         setPageIndex(pageIndex + 1);
@@ -83,15 +84,13 @@ const Members = props => {
             console.log(sd.length)
             setServerData(sd)
         }
+        setSelectAll(null)
     }
 
     const deleteSelected = () => {
         if (window.confirm('delete row?')) {
-            setServerData(serverData.filter(d => !d['selected']));
-        } else {
-            const tempData = Object.assign([], data);
-            tempData.forEach(d => d['selected'] = false)
-            setServerData(tempData)
+            setServerData(serverData.filter(d => !d.selected));
+            setSelectAll(null);
         }
     }
 
@@ -99,10 +98,11 @@ const Members = props => {
         // update the row with highlighting
         setServerData(serverData.map(d => {
             if (d.id === id) {
-                d['selected'] = !d['selected'];
+                d.selected = !d.selected;
             }
             return d;
         }));
+        setSelectAll(null);
     }
 
     const fetchData = () => {
@@ -120,8 +120,11 @@ const Members = props => {
 
         // get the only page.
         tableData = tableData.filter((td, i) => {
+            if (selectAll !== null) td.selected = selectAll;
             return i >= pageSize * pageIndex && i < (pageSize * pageIndex) + pageSize;
         });
+
+
 
         setData(tableData);
         setLoading(false);
@@ -144,6 +147,14 @@ const Members = props => {
         getMembersRequest();
     }, [getMembersRequest]);
 
+    const selectAllRows = (val) => {
+        serverData.forEach((sd, i) => {
+            if (i >= pageSize * pageIndex && i < (pageSize * pageIndex) + pageSize) {
+                sd.selected = val
+            }
+        })
+    }
+
     return (
         <div style={{ margin: 'auto', maxWidth: 1000, margin: 20 }}>
             <h2 style={{ marginTop: 0 }}>Members</h2>
@@ -151,6 +162,7 @@ const Members = props => {
             <Filter setFilter={filterData} placeholder={`Search ${members.items.length} records...`} />
             <Table
                 columns={columns}
+                selectAllRows={selectAllRows}
                 data={data}
                 loading={loading}
                 pageCount={pageCount}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import MaUTable from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -10,7 +10,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 
-const Table = ({ columns, data, pageIndex, loading, pageCount, deleteRow, editRow, selectRow }) => {
+const Table = ({ columns, data, pageIndex, loading, pageCount, deleteRow, editRow, selectRow, selectAllRows }) => {
+    const [selectAll, setSelectAll] = useState(false);
+
+    const selectAllCheckbox = () => {
+        selectAllRows(!selectAll);
+        setSelectAll(!selectAll);
+    }
+
     // Render the UI for your table
     return (
         <>
@@ -19,7 +26,7 @@ const Table = ({ columns, data, pageIndex, loading, pageCount, deleteRow, editRo
                     <TableRow>
                         {columns.map(column => (
                             <TableCell key={column.accessor}>
-                                {column.header}
+                                {column.accessor === 'select' ? <Checkbox onChange={selectAllCheckbox} /> : column.header}
                             </TableCell>
                         ))}
                     </TableRow>
@@ -29,7 +36,7 @@ const Table = ({ columns, data, pageIndex, loading, pageCount, deleteRow, editRo
                         return (
                             <TableRow key={row.id}>
                                 <TableCell>
-                                    <Checkbox checked={row.checked} onChange={() => selectRow(row.id)} />
+                                    <Checkbox checked={row.selected} onChange={() => selectRow(row.id)} />
                                 </TableCell>
                                 <TableCell>
                                     {row.id}
