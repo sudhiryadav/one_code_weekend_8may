@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/one_code_weekend_8may/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/one_code_weekend_8may/static/js/main.9d062a7a.chunk.js",
+    "main.js.map": "/one_code_weekend_8may/static/js/main.9d062a7a.chunk.js.map",
+    "runtime-main.js": "/one_code_weekend_8may/static/js/runtime-main.992c455a.js",
+    "runtime-main.js.map": "/one_code_weekend_8may/static/js/runtime-main.992c455a.js.map",
+    "static/js/2.14d427b4.chunk.js": "/one_code_weekend_8may/static/js/2.14d427b4.chunk.js",
+    "static/js/2.14d427b4.chunk.js.map": "/one_code_weekend_8may/static/js/2.14d427b4.chunk.js.map",
+    "static/js/3.bd440ded.chunk.js": "/one_code_weekend_8may/static/js/3.bd440ded.chunk.js",
+    "static/js/3.bd440ded.chunk.js.map": "/one_code_weekend_8may/static/js/3.bd440ded.chunk.js.map",
+    "index.html": "/one_code_weekend_8may/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/one_code_weekend_8may/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.14d427b4.chunk.js.LICENSE.txt": "/one_code_weekend_8may/static/js/2.14d427b4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.992c455a.js",
+    "static/js/2.14d427b4.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.9d062a7a.chunk.js"
+  ]
+}
